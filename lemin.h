@@ -24,7 +24,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <ncurses.h>
-# include "/home/alex/C/lemin/libft/libft.h"
+# include "libft/libft.h"
 
 typedef struct s_road t_road;
 struct s_road
@@ -44,12 +44,11 @@ typedef struct s_way t_way;
 struct s_way
 {
   char *name;
-  char *in;
-  char *out;
-  int *size;
-  t_way **next;
+  int	index;
+  int	size;
+  t_way *next;
   t_way *prev;
-  //t_way *nextOther;
+  t_way *Other;
   //t_way *prevOther;
 };
 
@@ -68,12 +67,15 @@ struct s_tree
   char **list;
   //t_list *prev;
 };
+/*
 
-void	ft_wayInit(t_way **way, t_road *road, t_tree *tree);
 void    ft_wayAdd(t_way **way, t_way *new);
 void    ft_wayAddOther(t_way **way, t_way *new);
 t_way   *ft_wayNew(t_road *road, char *name, char *start, char *ref);
 void    ft_way(t_way **way, t_road *road, char *src, char *start);
+*/
+void	ft_wayInit(t_way **way, t_tree *tree);
+
 
 void	ft_road(t_road **road, char *src);
 void	ft_roadInit(t_road **road, t_list *src);

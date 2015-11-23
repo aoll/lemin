@@ -12,7 +12,7 @@
 
 
 #include "lemin.h"
-#include "/home/alex/C/lemin/libft/libft.h"
+#include "libft/libft.h"
 
 int	main(int ac, char **av)
 {
@@ -38,7 +38,7 @@ int	main(int ac, char **av)
   
   ft_roadInit(&road, list);
 
-  //ft_wayInit(&way, road, tree);
+  
   //printf("<name: %s, size: %d>\n", tree->name, *tree->size);
   //ft_listPrint(list);
   //ft_roadPrint(road);
@@ -46,6 +46,8 @@ int	main(int ac, char **av)
   
   ft_treeRoad(&tree, road);
   ft_treeRoadPrint(tree);
+  
+  ft_wayInit(&way, road, tree);
   //printf("<road\n");
   
   //ft_wayPrint(way);
