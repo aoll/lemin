@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/12 20:58:14 by aollivie          #+#    #+#             */
-/*   Updated: 2014/11/20 20:32:07 by aollivie         ###   ########.fr       */
+/*   Updated: 2015/11/24 17:04:36 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char			**ft_cp(char **tab, char const *s, char c, size_t lin)
 			j = i;
 			y++;
 		}
-		tab[lin] = '\0';
+		tab[lin] = NULL;
 	}
 	return (tab);
 }
