@@ -12,7 +12,7 @@
 
 
 #include "lemin.h"
-#include "/home/alex/C/lemin/libft/libft.h"
+//#include "/home/alex/C/lemin/libft/libft.h"
 
 int	ft_nb_c(char *s, char c)
 {

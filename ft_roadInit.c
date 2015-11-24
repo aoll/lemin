@@ -12,7 +12,7 @@
 
 
 #include "lemin.h"
-#include "/home/alex/C/lemin/libft/libft.h"
+//#include "/home/alex/C/lemin/libft/libft.h"
 
 int	char_c(char *s, char c)
 {

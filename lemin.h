@@ -48,8 +48,17 @@ struct s_way
   int	size;
   t_way *next;
   t_way *prev;
-  t_way *Other;
-  //t_way *prevOther;
+};
+
+typedef struct s_index t_index;
+struct s_index
+{
+  int	index;
+  int	size;
+  t_index *next;
+  t_index *prev;
+  t_way *way;
+ 
 };
 
 typedef struct s_tree t_tree;
@@ -74,8 +83,11 @@ void    ft_wayAddOther(t_way **way, t_way *new);
 t_way   *ft_wayNew(t_road *road, char *name, char *start, char *ref);
 void    ft_way(t_way **way, t_road *road, char *src, char *start);
 */
+
+
 void	ft_wayInit(t_way **way, t_tree *tree);
 
+void	ft_indexInit(t_index **index, t_tree *tree);
 
 void	ft_road(t_road **road, char *src);
 void	ft_roadInit(t_road **road, t_list *src);

@@ -22,7 +22,9 @@ int	main(int ac, char **av)
   int rd;
   char *line;
   t_road *road;
-  t_way *way;
+
+  t_index *index;
+
 
   road = NULL;
   list = NULL;
@@ -47,11 +49,13 @@ int	main(int ac, char **av)
   ft_treeRoad(&tree, road);
   ft_treeRoadPrint(tree);
   
-  ft_wayInit(&way, road, tree);
-  //printf("<road\n");
-  
-  //ft_wayPrint(way);
-  //for(;;)
-  //ft_ncurseInit(tree);
+  //  ft_wayInit(&way, road, tree);
+  ft_indexInit(&index, tree);
+  while (index)
+    {
+      ft_printWay(index->way);
+      index = index->next;
+    }
+  //printf("wazaaaaaaaaaaaaaa: %s",index->way->name);
   return (0);
 }
