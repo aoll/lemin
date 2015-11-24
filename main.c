@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/31 20:39:18 by aollivie          #+#    #+#             */
-/*   Updated: 2015/03/31 21:06:52 by aollivie         ###   ########.fr       */
+/*   Updated: 2015/11/24 17:09:55 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int ac, char **av)
   ft_indexInit(&index, tree);
   while (index)
     {
+		printf("New way:\n");
       ft_printWay(index->way);
       index = index->next;
     }

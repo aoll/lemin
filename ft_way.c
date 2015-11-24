@@ -110,7 +110,7 @@ t_way	*ft_backWay(t_way *old)
   return (new->prev);
 }
 
-t_way	*ft_way(t_way **way, char *prevName, char *name, t_tree *tree, t_index **index)
+t_way	*ft_way(t_way **way, char *prevName, char *name, t_tree *tree, t_index **index, int first)
 {
   t_way *new;
   int nb;
@@ -133,21 +133,26 @@ t_way	*ft_way(t_way **way, char *prevName, char *name, t_tree *tree, t_index **i
 
   tmp = ft_getTree(tree, name); 
   
-  if (tree->end == true)       
+  if (tmp->start == true)
     return (new);
   while (tmp->list[nb])
     {
-      printf("tree name : %s, tree->list[%d], %s\n",tmp->name, nb, tmp->list[nb]);
+      printf("tree name STANDART: %s, tree->list[%d], %s\n",tmp->name, nb, tmp->list[nb]);
       if (ft_checkPrev(new, tmp->list[nb]) != 1 && rep == 0)
 	{
-	  new->next = ft_way(&new, new->name, tmp->list[nb], tree, index);
+		printf("tree name NB0 ?: %s, tree->list[%d], %s\n",tmp->name, nb, tmp->list[nb]);
+		new->next = ft_way(&new, new->name, tmp->list[nb], tree, index, 2);
 	  rep++;
 	}
-      else if (ft_checkPrev(new, tmp->list[nb]) != 1 && rep > 0)
-	{      
+	  else if (ft_checkPrev(new, tmp->list[nb]) != 1 && rep > 0)
+	{
+		printf("tree name NB++ : %s, tree->list[%d], %s\n",tmp->name, nb, tmp->list[nb]);
+		printf("WTF??\n");
+		 printf("list NB !! %s\n", tmp->list[nb]); 
 	  indexTmp = ft_index(indexTmp->index);
 	  indexTmp->way = ft_backWay(new);		// || new->prev ??
 	  ft_addIndex(index, indexTmp);
+	 
 	}
 	  nb++;
     }
@@ -162,5 +167,5 @@ void	ft_indexInit(t_index **index, t_tree *tree)
 
   *index = ft_index(0);
   tmp = *index;
-  tmp->way = ft_way(&tmp->way, NULL, ft_endName(tree), tree, &tmp);
+  tmp->way = ft_way(&tmp->way, NULL, ft_endName(tree), tree, &tmp, 1);
 }
