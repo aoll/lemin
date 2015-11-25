@@ -66,7 +66,7 @@ void	ft_treeSetEtat(t_tree **tree, t_list *list, char *target, int start)
 	  while (list && list->name[0] != '#' && ft_nb_c(list->name,' ') == 2)
 	    {
 	      if (start == 0)
-		printf("test if\n");
+		printf("test if\n"); // a virer
 	      else if (start == 1)
 		{
 		  ft_setEtatBis(tree, list->name, start);

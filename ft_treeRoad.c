@@ -83,46 +83,35 @@ void	ft_treeRoadInit(t_tree **tree, t_road *road)
   //return ;
 
   nb = ft_nb_way(road, tmp->name);
-  printf("name %s, nb de routes: %d\n", tmp->name, nb);
-  //return (NULL);
-  //  if (!(tmp->tab = malloc(sizeof(t_tree *) * nb + 1)))
-  // printf("NULLLLLLLLLLLLLLLLLLL\n");
-  //tmp->tab[nb] = NULL;
+
   if (!(tmp->list = malloc(sizeof(char *) * nb + 1)))
-    printf("NULLLLLLLLLLLLLLLLLLL\n");
+    printf("NULLLLLLLLLLLLLLLLLLL\n"); /// printf
   tmp->list[nb] = NULL;
-//tmp->list = malloc(sizeof(char *) * nb);
 
   nb = 0;
-  //nb++;
-  //tmp = road;
   while (road) 
     {
       
       if (ft_strcmp(road->in, tmp->name) == 1)
 	{
 
-	  //  tmp->tab[nb] = ft_giveBack(tmp, road->out);
-	  //	  printf("roadout strdup K: %s\n", road->out);
+
 	  tmp->list[nb] = ft_strdup(road->out);
-	  printf("out:: %s\n", tmp->list[nb]);
-	  //tmp3 = tmp->tab[nb];
-	  //printf("road_inOK: %s\n", tmp3->name);
+
 	  nb++;
-	   printf("i in = %d\n", i++);
+
 	}
         
       else if (ft_strcmp(road->out, tmp->name) == 1)
 	{
-	  // tmp->tab[nb] = ft_giveBack(tmp, road->in);
+
 	  tmp->list[nb] = ft_strdup(road->in);
-	  printf("in:: %s\n", tmp->list[nb]);
-	  //printf("road_out: %s\n", road->in);
+
 	  nb++;
-	  printf("i = %d\n", i++);
+
 	}
       
-      //printf("NULLLLLLLLLLLLLLLLLLL\n");
+
       road = road->next;
     }
  

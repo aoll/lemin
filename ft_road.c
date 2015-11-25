@@ -59,7 +59,6 @@ void	ft_road(t_road **road, char *src)
   tmp = *road;
   if (*road == NULL)
     {
-      printf("New road\n"); 
       size = malloc(sizeof(int));
       *size = 1;
       //printf("%p\n", n);

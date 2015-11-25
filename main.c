@@ -29,6 +29,7 @@ int	main(int ac, char **av)
   road = NULL;
   list = NULL;
   tree = NULL;
+  index = NULL;
   //printf("%p", &e);
   //e->a = 5;
   ac = ac;
@@ -47,16 +48,17 @@ int	main(int ac, char **av)
   //ft_treePrint(tree);
   
   ft_treeRoad(&tree, road);
-  ft_treeRoadPrint(tree);
+  //  ft_treeRoadPrint(tree);
   
   //  ft_wayInit(&way, road, tree);
   ft_indexInit(&index, tree);
-  while (index)
-    {
-		printf("New way:\n");
-      ft_printWay(index->way);
+  while (index )
+  {
+      if (index->way) {
+      printf("New way:\n");
+      ft_printWay(index->way); }
       index = index->next;
-    }
+  }
   //printf("wazaaaaaaaaaaaaaa: %s",index->way->name);
   return (0);
 }
