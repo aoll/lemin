@@ -106,8 +106,6 @@ t_way	*ft_cpWay(t_way *src)
 {
   t_way *new;
 
-
-  //  printf("cpWay: %s\n", src->name);
   new = malloc(sizeof(t_way));
   new->name = ft_strdup(src->name);
   new->next = NULL;
@@ -149,7 +147,7 @@ void	ft_prevInit(t_index **tmp, t_way *new)
 		tmp2->way = tmp2->way->next;
 	}
 	tmp2->way->next = new;;
-	//tmp2->way = new;
+
 }
 
 
@@ -161,25 +159,19 @@ void	ft_prev(t_index **tmp2,t_way *new)
 	tmp = *tmp2;
   while (new->prev)
     {
-      printf("PREV: %s\n", new->name);
+//      printf("PREV: %s\n", new->name);
 	  ft_prevInit(tmp2, ft_cpWay(new));
       new = new->prev;
     }
-  
-  
-   //while(tmp->way->prev)
-   //tmp->way = tmp->way->prev;
-
-   //return (tmp);
   
 }
 
 void	printprev(t_way *way)
 {
-  printf("PRINTPREV\n");
+//  printf("PRINTPREV\n");
   while (way)
     {
-      printf("new= %s\n", way->name);
+		//    printf("new= %s\n", way->name);
       way = way->prev;
     }
 }
@@ -226,16 +218,13 @@ t_way	*ft_way(t_way **way, char *prevName, char *name, t_tree *tree, t_index **i
   if (tmp->start == true){ 
     // printf("START: %s\n ", tmp->name);
     return (new);}
-  if (tmp->start == true){ 
-    //printf("NO GOOD START: %s\n ", tmp->name);
-    }
-  //printf("NAME: %s\n", name);  
+
   while (tmp->list[nb])
     {
-      //printf("getTree: %s, nb: %d\n",tmp->list[nb], nb);
+      
       if (ft_checkPrev(new, tmp->list[nb]) != 1 && rep == 0)
 	{
-	  //printf("ft_checkPrev: %d\n", ft_checkPrev(new, tmp->list[nb]));
+	  
 	  new->next = ft_way(&new, new->name, tmp->list[nb], tree, index, 2);
 	  rep++;
 	}
@@ -250,8 +239,6 @@ t_way	*ft_way(t_way **way, char *prevName, char *name, t_tree *tree, t_index **i
 		indexTmp3->way = ft_way(&indexTmp3->way, NULL, ft_endName(tree), tree, index, 5);
 		ft_prev(&indexTmp2, new);
 		
-	   //	   printprev(new);
-		//indexTmp2->way->next = ft_way(&indexTmp2->way, new->name, tmp->list[nb], tree, index, 2);
 		ft_prevInit(&indexTmp2, ft_way(&indexTmp2->way, new->name, tmp->list[nb], tree, index, 2));
 		indexTmp3->way->next = indexTmp2->way;
 	   
