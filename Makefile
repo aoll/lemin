@@ -6,7 +6,7 @@
 #    By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/02 08:22:38 by aollivie          #+#    #+#              #
-#    Updated: 2015/03/31 20:43:22 by aollivie         ###   ########.fr        #
+#    Updated: 2015/11/25 16:13:04 by aollivie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@ NAME = lemin
 
 IDIR = libft/libft.a
 LIB=-lncurses
-SRC = ft_way.c main.c ft_tree.c ft_treeInit.c  ft_treeRoad.c ft_road.c ft_roadInit.c ft_ncurseIni.c 
+SRC = ft_wayInit.c ft_way.c main.c ft_tree.c ft_treeInit.c  ft_treeRoad.c ft_road.c ft_roadInit.c ft_ncurseIni.c 
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)

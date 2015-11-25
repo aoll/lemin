@@ -137,26 +137,40 @@ t_way	*ft_backWay(t_way *old)
   else
     return (new);
 }
-t_index *	ft_prev(t_index *tmp,t_way *new)
+
+void	ft_prevInit(t_index **tmp, t_way *new)
+{
+	t_index *tmp2;
+	
+	printf("PREVINIT: %s\n", new->name);
+	tmp2 = *tmp;
+	while (tmp2->way->next)
+	{
+		tmp2->way = tmp2->way->next;
+	}
+	tmp2->way->next = new;;
+	//tmp2->way = new;
+}
+
+
+void	ft_prev(t_index **tmp2,t_way *new)
 {
     
+	t_index *tmp;
+
+	tmp = *tmp2;
   while (new->prev)
     {
       printf("PREV: %s\n", new->name);
+	  ft_prevInit(tmp2, ft_cpWay(new));
       new = new->prev;
     }
   
-   while (new->prev)
-    {
-      tmp->way->next = ft_cpWay(new);
-      tmp->way->next->prev = tmp->way;
-      tmp->way = tmp->way->next;
-      new = new->next;
-    }
-   while(tmp->way->prev)
-     tmp->way = tmp->way->prev;
+  
+   //while(tmp->way->prev)
+   //tmp->way = tmp->way->prev;
 
-   return (tmp);
+   //return (tmp);
   
 }
 
@@ -179,6 +193,7 @@ t_way	*ft_way(t_way **way, char *prevName, char *name, t_tree *tree, t_index **i
   int rep;
   t_index *indexTmp;
   t_index *indexTmp2;
+   t_index *indexTmp3;
 
   
   indexTmp = *index;
@@ -230,14 +245,18 @@ t_way	*ft_way(t_way **way, char *prevName, char *name, t_tree *tree, t_index **i
 	  
 	   indexTmp2 = ft_index(indexTmp->index);
 	  
-	   indexTmp2->way = ft_way(&indexTmp2->way, NULL, ft_endName(tree), tree, index, 5);
-	   
-	   indexTmp2 = ft_prev(indexTmp2, new);
+	   indexTmp3 = ft_index(indexTmp->index);
+	    indexTmp2->way = ft_way(&indexTmp2->way, NULL, ft_endName(tree), tree, index, 5);
+		indexTmp3->way = ft_way(&indexTmp3->way, NULL, ft_endName(tree), tree, index, 5);
+		ft_prev(&indexTmp2, new);
+		
 	   //	   printprev(new);
-      	   indexTmp2->way->next = ft_way(&indexTmp2->way, new->name, tmp->list[nb], tree, index, 2);
+		//indexTmp2->way->next = ft_way(&indexTmp2->way, new->name, tmp->list[nb], tree, index, 2);
+		ft_prevInit(&indexTmp2, ft_way(&indexTmp2->way, new->name, tmp->list[nb], tree, index, 2));
+		indexTmp3->way->next = indexTmp2->way;
 	   
-	   
-	   ft_addIndex(index, indexTmp2);
+		
+	   ft_addIndex(index, indexTmp3);
 	  
 	}
 	  nb++;

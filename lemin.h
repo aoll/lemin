@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/31 20:20:23 by aollivie          #+#    #+#             */
-/*   Updated: 2015/03/31 21:04:15 by aollivie         ###   ########.fr       */
+/*   Updated: 2015/11/25 16:06:48 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_way   *ft_wayNew(t_road *road, char *name, char *start, char *ref);
 void    ft_way(t_way **way, t_road *road, char *src, char *start);
 */
 
+void	ft_printWay(t_way * way);
 
 void	ft_wayInit(t_way **way, t_tree *tree);
 
