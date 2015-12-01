@@ -44,14 +44,15 @@ int	main(int ac, char **av)
   
   //printf("<name: %s, size: %d>\n", tree->name, *tree->size);
   //ft_listPrint(list);
-  //ft_roadPrint(road);
+  //  ft_roadPrint(road);
   //ft_treePrint(tree);
   
   ft_treeRoad(&tree, road);
-  //  ft_treeRoadPrint(tree);
-  
+  ft_treeRoadPrint(tree);
+  ft_che(tree);
   //  ft_wayInit(&way, road, tree);
-  ft_indexInit(&index, tree);
+  /*     
+ ft_indexInit(&index, tree);
   while (index )
   {
       if (index->way) {
@@ -59,6 +60,7 @@ int	main(int ac, char **av)
       ft_printWay(index->way); }
       index = index->next;
   }
+  */
   //printf("wazaaaaaaaaaaaaaa: %s",index->way->name);
   return (0);
 }

@@ -26,6 +26,22 @@
 # include <ncurses.h>
 # include "libft/libft.h"
 
+
+typedef struct s_che t_che;
+struct s_che
+{
+  int check;
+  char *name;
+  int poids;
+  int pos;
+  int *size;
+  t_che *next;
+  t_che *list;
+  t_che *prev;
+  t_che *fa;
+
+};
+
 typedef struct s_road t_road;
 struct s_road
 {
@@ -74,15 +90,16 @@ struct s_tree
   t_tree *next;
   t_tree **tab;
   char **list;
-  //t_list *prev;
+  t_tree *prev;
 };
-/*
 
-void    ft_wayAdd(t_way **way, t_way *new);
-void    ft_wayAddOther(t_way **way, t_way *new);
-t_way   *ft_wayNew(t_road *road, char *name, char *start, char *ref);
-void    ft_way(t_way **way, t_road *road, char *src, char *start);
-*/
+void	ft_printChe(t_che *che);
+
+void    ft_cpChe(t_che **che, t_tree *tree);
+
+t_che   *ft_newChe(int poids);
+
+void	ft_che(t_tree *tree);
 
 void	ft_printWay(t_way * way);
 
@@ -97,4 +114,12 @@ void    ft_treeRoad(t_tree **tree, t_road *road);
 void	ft_tree(t_tree **tree, t_list *src);
 void	ft_treeInit(t_tree **tree, t_list *src);
 void	ft_ncurseInit(t_tree *tree);
+
+/*
+
+void    ft_wayAdd(t_way **way, t_way *new);
+void    ft_wayAddOther(t_way **way, t_way *new);
+t_way   *ft_wayNew(t_road *road, char *name, char *start, char *ref);
+void    ft_way(t_way **way, t_road *road, char *src, char *start);
+*/
 #endif

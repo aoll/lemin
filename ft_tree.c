@@ -40,7 +40,7 @@ void	ft_treeAdd(t_tree **tree, t_tree *new)
     tmp = tmp->next;
   *new->size = *new->size + 1;
   tmp->next = new;
-  
+  new->prev = tmp;
   
 }
 

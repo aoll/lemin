@@ -49,7 +49,7 @@ static char    *ft_startName(t_tree *tree)
   return (NULL);
 }
 
-t_tree	*ft_getTree(t_tree *tree, char *name)
+static t_tree	*ft_getTree(t_tree *tree, char *name)
 {
   while(tree)
     {
@@ -60,7 +60,7 @@ t_tree	*ft_getTree(t_tree *tree, char *name)
   return (NULL);
 }
 
-int	ft_checkPrev(t_way *way, char *name)
+static int	ft_checkPrev(t_way *way, char *name)
 {
 
   while (way != NULL)
@@ -102,7 +102,7 @@ void	ft_addIndex(t_index **index, t_index *new)
   new->prev = tmp;
 }
 
-t_way	*ft_cpWay(t_way *src)
+static t_way	*ft_cpWay(t_way *src)
 {
   t_way *new;
 
@@ -233,17 +233,21 @@ t_way	*ft_way(t_way **way, char *prevName, char *name, t_tree *tree, t_index **i
 	  
 	  
 	   indexTmp2 = ft_index(indexTmp->index);
-	  
 	   indexTmp3 = ft_index(indexTmp->index);
-	    indexTmp2->way = ft_way(&indexTmp2->way, NULL, ft_endName(tree), tree, index, 5);
-		indexTmp3->way = ft_way(&indexTmp3->way, NULL, ft_endName(tree), tree, index, 5);
-		ft_prev(&indexTmp2, new);
-		
-		ft_prevInit(&indexTmp2, ft_way(&indexTmp2->way, new->name, tmp->list[nb], tree, index, 2));
-		indexTmp3->way->next = indexTmp2->way;
 	   
-		
-	   ft_addIndex(index, indexTmp3);
+	   indexTmp2->way = ft_way(&indexTmp2->way, NULL, ft_endName(tree), tree, index, 5);
+	   indexTmp3->way = ft_way(&indexTmp3->way, NULL, ft_endName(tree), tree, index, 5);
+	   
+	   //	    ft_prev(&indexTmp2, new);
+	   
+	   ft_prevInit(&indexTmp2, ft_way(&indexTmp2->way, new->name, tmp->list[nb], tree, index, 2));
+	   
+	   indexTmp3->way->next = indexTmp2->way;
+	   
+	   if (ft_strcmp(indexTmp3->way->name, indexTmp2->way->name) == 1)
+	     ft_addIndex(index, indexTmp2);
+	   else
+	     ft_addIndex(index, indexTmp3);
 	  
 	}
 	  nb++;
