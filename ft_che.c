@@ -132,70 +132,140 @@ void	ft_firstChe(t_che **che, t_tree *tree)
 
 void	ft_nextChe(t_che **che, t_tree *tree)
 {
+  printf("ENTER FT_NEXTCHE\n");
   t_che *tmp2;
   t_che *tmp;
   t_che *list;
   t_tree *tampon;
   t_tree *buff;
 
+
   tmp2 = *che;
-  tampon = malloc(sizeof(t_tree));
-  tmp = tmp2->list;
-   
- buff = ft_getTreeEnd(tree);
-  if (ft_strcmp(tmp->name, buff->name) == 1)
-    return;
- 
-buff = ft_getTreeStart(tree);
-  // A VERIFIER PAS SUR DUTOUT QUE LA CONDITION SOIS PRIS EN COMPTE ...
-  if (ft_strcmp(tmp->name, buff->name) == 1)
+  if (tmp2->list)
+    tmp = tmp2->list;
+  else
     return;
 
+  tampon = malloc(sizeof(t_tree));
+
+   
+  buff = malloc(sizeof(t_tree));
+  buff = ft_getTreeEnd(tree);
+
+printf("OUT Z FT_NEXTCHE\n");
+ 
+ printf("NULLLLLLL tmp->name: %s, buff->name:\n", buff->name);//, buff->name);
+if (ft_strcmp(tmp->name, buff->name) == 1)
+  {
+    printf("OUT 0 FT_NEXTCHE\n");
+    return;
+  }
+   printf("OUT null FT_NEXTCHE:\n");  
+  buff = ft_getTreeStart(tree);
+  if (ft_strcmp(tmp->name, buff->name) == 1)
+    return;
+printf("OUT 1 FT_NEXTCHE\n");
   while (tmp)
     {
       tampon = ft_getTree(tree, tmp->name);
       if (ft_strcmp(tmp->name, buff->name) != 1)
 	{
-	  //  if (ft_checkFa(tmp2, tmp->name) != 1)
 	      ft_cpWay(&tmp,tampon);
 	}
-      list = tmp->list;
-      //      while (list)
-      //	{
-	  /*
-	   if (ft_strcmp(list->name, buff->name) != 1)
-	     ft_cpWay(&list, ft_getTree(tree, list->name));
-	  */
-	  /*  if (ft_strcmp(list->name, buff->name) != 1)
-	      ft_nextChe(&list, tree);
-	  */
-      //    list = list->next;
-      //	}
       tmp = tmp->next;
     }
+  printf("OUT FT_NEXTCHE\n");
 }
 void	ft_cheIni(t_che **che, t_tree *tree)
 {
   t_che *t;
+  t_tree *tmp;
 
+  printf("ENTER FT_CHEINI\n");
   t = *che;
+  printf("T CHE NAME: %s\n", t->name);
+  tmp = malloc(sizeof(t_tree));
+  ft_nextChe(&t, tree);
+  if (t->list == NULL)
+    return;
+  
   t = t->list;
+  
   while (t)
     {
-      ft_nextChe(&t, tree);
+      printf("T LIST NAME: %s\n", t->name);
+      tmp = ft_getTree(tree, t->name);
+      if (tmp->start == false)
+	{
+	  //ft_nextChe(&t, tree);
+	  ft_cheIni(&t, tree);
+	}
+      else
+	t->check = 1;
       t = t->next;
     }
+   printf("OUT FT_CHEINI\n");
 }
+
+static void ft_noCheck(t_che **che1, t_tree *tree, t_tree *name)
+{
+  t_che *che;
+
+  che = *che1;
+  while (che)
+    {
+      
+      if (ft_strcmp(name->name, che->name) == 1)
+	{
+	  //printf("NOCHECK, NAME: %s, POIDS: %d, CHECK: %d\n" ,che->name, che->poids, che->check);
+	   che->check = 1;
+	}
+            if (che->check != 1)
+	{
+	  //	  printf("WTF??????");
+	  ft_cheIni(&che, tree);
+	}
+
+      che = che->next;
+    }
+}
+
+static void      ft_while(t_che **che1, t_tree *tree)
+{
+  t_che *che;
+
+  che = *che1;
+  if (che->list == NULL)
+    return;
+  che = che->list;
+  ft_noCheck(&che->list, tree, ft_getTreeStart(tree));
+
+  while (che)
+    {
+      // printf("WTF??????\n");
+      ft_while(&che, tree);
+
+      che = che->next;
+    }
+}
+
 
 void	ft_che(t_tree *tree)
 {
   t_che *che;
 
   ft_firstChe(&che, tree);
-  ft_nextChe(&che, tree);
+  //ft_nextChe(&che, tree);
   ft_cheIni(&che, tree);
-  //ft_nextChe(&che->list, tree);
+  //ft_cheIni(&che, tree);
   
+  //  ft_cheIni(&che->list, tree);
+  /*
+  ft_cheIni(&che->list->list, tree);
+  ft_cheIni(&che->list->next, tree);
+  ft_cheIni(&che->list->next->list, tree);
+  */
+//ft_while(&che, tree);
 
    ft_printChe(che);
 }

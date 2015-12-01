@@ -18,18 +18,23 @@ int		ft_strcmp(const char *s1, const char *s2)
 	int				i;
 	unsigned char	*str1;
 	unsigned char	*str2;
-	
+
+	printf("TEST STRCMP S1: %s, s2: %s\n", s1, s2);	
 	str1 = (unsigned char *)s1;
 	str2 = (unsigned char *)s2;
-	/*
+	
 	if (!str1 && !str2)
 		return (1);
+	if (str1 == NULL && str2 == NULL)
+		return (1);
+	if (str1 == NULL || str2 == NULL)
+		return (0);
 	if (s1[0] == '\0' || s2[0] == '\0')
 		return (0);
 	
 	if (!str1 || !str2)
 		return (0);
-	*/
+     
 	i = 0;
 	while (str1[i] && str2[i])
 	{
