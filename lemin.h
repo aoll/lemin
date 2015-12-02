@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/31 20:20:23 by aollivie          #+#    #+#             */
-/*   Updated: 2015/12/02 10:23:19 by aollivie         ###   ########.fr       */
+/*   Updated: 2015/12/02 13:57:08 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ struct s_tree
   t_tree *prev;
 };
 
+int		ft_error(char *s);
 
 void	ft_choose(t_way *way, t_tree *tree);
 

@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/31 20:39:18 by aollivie          #+#    #+#             */
-/*   Updated: 2015/12/02 08:47:04 by aollivie         ###   ########.fr       */
+/*   Updated: 2015/12/02 15:15:38 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,17 @@ int	main(int ac, char **av)
   road = NULL;
   list = NULL;
   tree = NULL;
-  //  index = NULL;
-  //printf("%p", &e);
-  //e->a = 5;
+
   ac = ac;
   fd = open(av[1], O_RDONLY);
   while ((rd = get_next_line(fd, &line)) > 0)
-    ft_list(&list, line);
+  {
+	  ft_list(&list, line);
+  }
   
   ft_treeInit(&tree, list);
   
   ft_roadInit(&road, list);
-
   
   //printf("<name: %s, size: %d>\n", tree->name, *tree->size);
   //ft_listPrint(list);

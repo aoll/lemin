@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 08:25:44 by aollivie          #+#    #+#             */
-/*   Updated: 2015/12/02 10:34:33 by aollivie         ###   ########.fr       */
+/*   Updated: 2015/12/02 13:54:40 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static t_way	*ft_getShort(t_way *w)
 			n = w;
 		w = w->list;
 	}
-//	n->list = NULL;
+	n->list = NULL;
 	return (n);
 }
 
