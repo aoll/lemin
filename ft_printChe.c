@@ -5,7 +5,7 @@ static void father(t_che *che)
     printf("FATHER!!\n");
   while(che)
     {
-      printf("NAME: %s, POIDS: %d, CHECK: %d\n",che->name, che->poids, che->check);
+      printf("NAME: %s, POIDS: %d, CHECK: %d, FIN: %d\n",che->name, che->poids, che->check, che->fin);
       che = che->fa;
     }
 }
@@ -14,7 +14,7 @@ static void print(t_che *che, char *s)
   while (che)
     {
       //   ft_while(che->list);
-    printf("ROUTE: %s, NAME: %s, POIDS: %d, CHECK: %d\n",s ,che->name, che->poids, che->check);
+      printf("ROUTE: %s, NAME: %s, POIDS: %d, CHECK: %d, FIN: %d\n",s ,che->name, che->poids, che->check, che->fin);
     // father(che->fa);
      che = che->next;
     }

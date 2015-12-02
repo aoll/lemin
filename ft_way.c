@@ -1,267 +1,130 @@
 #include "lemin.h"
 
-void	ft_printWay(t_way *tmp)
+static void pw(t_way *w)
 {
-  t_way *tmp2;
-
-  tmp2 = tmp;
-
-  while(tmp2)
+  printf("NEW WAY\n");
+  while (w)
     {
-
-      printf("<name : %s>\n",tmp2->name);
-      tmp2 = tmp2->next;
+      printf("NAME: %s\n", w->name);
+      w = w->next;
     }
-  /*
-  while(tmp->next)
-    {
-      tmp = tmp->next;
-    }
-  printf("<TMP->PREV>\n");
-  while(tmp)
-    {
-      printf("<name : %s>\n",tmp->name);
-      tmp = tmp->prev;
-    }
-  */
 }
 
-
-static char    *ft_endName(t_tree *tree)
+static void printWay(t_way *w)
 {
-  while (tree)
+  while (w)
     {
-      if (tree->end == true)
-        return (tree->name);
-      tree = tree->next;
+      pw(w);
+      //      printf("NAME: %s\n", w->name);
+      w = w->list;
     }
-  return (NULL);
 }
 
-static char    *ft_startName(t_tree *tree)
+void	ft_addList(t_way **w, t_way *n)
 {
-  while (tree)
+  t_way *t;
+
+  t = *w;
+  if (t->list == NULL)
     {
-      if (tree->start == true)
-        return (tree->name);
-      tree = tree->next;
+      t->list = n;
+      return;
     }
-  return (NULL);
-}
-
-static t_tree	*ft_getTree(t_tree *tree, char *name)
-{
-  while(tree)
+  t = t->list;
+  while (t->list)
     {
-      if (ft_strcmp(tree->name, name) == 1)
-	return (tree);
-      tree= tree->next;
+      t = t->list;
     }
-  return (NULL);
+  t->list = n;
 }
 
-static int	ft_checkPrev(t_way *way, char *name)
+void	ft_addWay(t_way **w, t_way *n)
 {
+  t_way *t;
 
-  while (way != NULL)
+  t = *w;
+  while (t->next)
     {
-      
-      if (ft_strcmp(way->name, name) == 1)
-	return (1);
-      way = way->prev;
+      t = t->next;
     }
-
-  return (0);
+  t->next = n;
+  n->prev = t;
 }
 
-t_index		*ft_index(int index)
-{
-  t_index *new;
-
-
-  //  printf("index create: %d\n", index);
-  new = malloc(sizeof(t_index));
-  new->index = index + 1;
-  new->next = NULL;
-  new->prev = NULL;
-  new->way = malloc(sizeof(t_way));
-  return (new);
-}
-
-void	ft_addIndex(t_index **index, t_index *new)
-{
-  t_index *tmp;
-
-  tmp = *index;
-
-  while (tmp->next)
-    {
-      tmp = tmp->next;
-    }
-  tmp->next = new;
-  new->prev = tmp;
-}
-
-static t_way	*ft_cpWay(t_way *src)
+t_way	*ft_newWay(char *s)
 {
   t_way *new;
 
   new = malloc(sizeof(t_way));
-  new->name = ft_strdup(src->name);
+  new->index = 0;
+  new->size = 1;
+  new->name = ft_strdup(s);
   new->next = NULL;
   new->prev = NULL;
+  new->list = NULL;
   return (new);
 }
 
-t_way	*ft_backWay(t_way *old)
+static t_way	*ft_cp(t_che *che)
 {
-  t_way *new;
+  t_way *n;
 
-  printf("backWay: %s\n", old->name);
-  new = ft_cpWay(old);
-  if (old->prev) 
+  n = ft_newWay(che->name);
+  //printf("NEW WAY: 0\n");
+  che = che->fa;
+  while (che)
     {
-      old = old->prev;
-      while (old->prev)
-	{
-	  	 
-	  new->prev = ft_cpWay(old);
-	  new->prev->next = new;
-	  old = old->prev;
-	}
+      //printf("NAME: %s\n", che->name);
+      ft_addWay(&n, ft_newWay(che->name));
+      che = che->fa;
     }
-  if (new->prev)
-    return (new->prev);
+  return (n);
+}
+
+static void	ft_init(t_way **way, t_che *che)
+{
+  t_way *t;
+
+  t = *way;
+  if (t == NULL)
+    {
+     printf("FIRST!!!\n");
+    *way = ft_cp(che);
+    } 
   else
-    return (new);
-}
+    ft_addList(way, ft_cp(che));
+} 
 
-void	ft_prevInit(t_index **tmp, t_way *new)
+static void print(t_way **way, t_che *che, char *s)
 {
-	t_index *tmp2;
-	
-	printf("PREVINIT: %s\n", new->name);
-	tmp2 = *tmp;
-	while (tmp2->way->next)
+  
+  while (che)
+    {
+      if (che->fin == 1)
 	{
-		tmp2->way = tmp2->way->next;
+	  ft_init(way, che);
+	  printf("YOUPI!!!!!\n");
 	}
-	tmp2->way->next = new;;
-
-}
-
-
-void	ft_prev(t_index **tmp2,t_way *new)
-{
-    
-	t_index *tmp;
-
-	tmp = *tmp2;
-  while (new->prev)
-    {
-//      printf("PREV: %s\n", new->name);
-	  ft_prevInit(tmp2, ft_cpWay(new));
-      new = new->prev;
-    }
-  
-}
-
-void	printprev(t_way *way)
-{
-//  printf("PRINTPREV\n");
-  while (way)
-    {
-		//    printf("new= %s\n", way->name);
-      way = way->prev;
+      che = che->next;
     }
 }
 
-t_way	*ft_way(t_way **way, char *prevName, char *name, t_tree *tree, t_index **index, int first)
+static void      ft_while(t_way **way, t_che *che)
 {
-  t_way *new;
-  t_way *wayTmp;
-  int nb;
-  t_tree *tmp;
-  int rep;
-  t_index *indexTmp;
-  t_index *indexTmp2;
-   t_index *indexTmp3;
-
-  
-  indexTmp = *index;
-  nb = 0;
-  rep = 0;
-  tmp = tree;
-  new = malloc(sizeof(t_way));
-  wayTmp = malloc(sizeof(t_way));
-  new->name = ft_strdup(name);
-  if (prevName)
+  print(way, che->list, che->name);
+  while (che->list)
     {
-      new->prev = *way;
+      ft_while(way, che->list);
+      che->list = che->list->next;
     }
-  else
-    new->prev = NULL;
-  int test;
-
-  test = 0;
-  tmp = ft_getTree(tree, name);
-  /*
-  while (tmp->list[test])
-    {
-      printf("%s\n", tmp->list[test++]);
-    }
-  //return (NULL);
-  */
-  if (first == 5)
-    return (new);
-  
-  if (tmp->start == true){ 
-    // printf("START: %s\n ", tmp->name);
-    return (new);}
-
-  while (tmp->list[nb])
-    {
-      
-      if (ft_checkPrev(new, tmp->list[nb]) != 1 && rep == 0)
-	{
-	  
-	  new->next = ft_way(&new, new->name, tmp->list[nb], tree, index, 2);
-	  rep++;
-	}
-	  else if (ft_checkPrev(new, tmp->list[nb]) != 1 && rep > 0)
-	{
-	  
-	  
-	   indexTmp2 = ft_index(indexTmp->index);
-	   indexTmp3 = ft_index(indexTmp->index);
-	   
-	   indexTmp2->way = ft_way(&indexTmp2->way, NULL, ft_endName(tree), tree, index, 5);
-	   indexTmp3->way = ft_way(&indexTmp3->way, NULL, ft_endName(tree), tree, index, 5);
-	   
-	   //	    ft_prev(&indexTmp2, new);
-	   
-	   ft_prevInit(&indexTmp2, ft_way(&indexTmp2->way, new->name, tmp->list[nb], tree, index, 2));
-	   
-	   indexTmp3->way->next = indexTmp2->way;
-	   
-	   if (ft_strcmp(indexTmp3->way->name, indexTmp2->way->name) == 1)
-	     ft_addIndex(index, indexTmp2);
-	   else
-	     ft_addIndex(index, indexTmp3);
-	  
-	}
-	  nb++;
-    }
-  return (new);
 }
-  
-  
 
-void	ft_indexInit(t_index **index, t_tree *tree)
+void	ft_way(t_che *che, t_tree *tree)
 {
-  t_index *tmp;
+  t_way *way;
 
-  *index = ft_index(0);
-  tmp = *index;
-  tmp->way = ft_way(&tmp->way, NULL, ft_endName(tree), tree, &tmp, 1);
+  way = NULL;
+  ft_while(&way, che);
+
+  printWay(way);
 }

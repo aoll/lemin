@@ -30,6 +30,7 @@
 typedef struct s_che t_che;
 struct s_che
 {
+  int fin;
   int check;
   char *name;
   int poids;
@@ -64,6 +65,7 @@ struct s_way
   int	size;
   t_way *next;
   t_way *prev;
+  t_way *list;
 };
 
 typedef struct s_index t_index;
@@ -93,17 +95,19 @@ struct s_tree
   t_tree *prev;
 };
 
+void	ft_way(t_che *che, t_tree *tree);
+
 void	ft_printChe(t_che *che);
 
 void    ft_cpChe(t_che **che, t_tree *tree);
 
 t_che   *ft_newChe(int poids);
 
-void	ft_che(t_tree *tree);
+void	ft_che(t_che **che, t_tree *tree);
 
-void	ft_printWay(t_way * way);
+//void	ft_printWay(t_way * way);
 
-void	ft_wayInit(t_way **way, t_tree *tree);
+//void	ft_wayInit(t_way **way, t_tree *tree);
 
 void	ft_indexInit(t_index **index, t_tree *tree);
 
