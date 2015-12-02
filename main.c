@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/31 20:39:18 by aollivie          #+#    #+#             */
-/*   Updated: 2015/11/24 17:09:55 by aollivie         ###   ########.fr       */
+/*   Updated: 2015/12/02 08:47:04 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@ int	main(int ac, char **av)
   int rd;
   char *line;
   t_road *road;
-
-  //  t_index *index;
-  
+  t_way *way;
   t_che *che;
 
+  way = NULL;
   che = NULL;
   road = NULL;
   list = NULL;
@@ -50,9 +49,11 @@ int	main(int ac, char **av)
   //ft_treePrint(tree);
   
   ft_treeRoad(&tree, road);
-  ft_treeRoadPrint(tree);
+//  ft_treeRoadPrint(tree);
   ft_che(&che, tree);
 
-  ft_way(che, tree);
+  ft_way(&way, che, tree);
+  //printWay(way);
+  ft_choose(way, tree);
   return (0);
 }

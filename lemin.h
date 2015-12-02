@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/31 20:20:23 by aollivie          #+#    #+#             */
-/*   Updated: 2015/11/25 16:06:48 by aollivie         ###   ########.fr       */
+/*   Updated: 2015/12/02 10:23:19 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ struct s_way
   char *name;
   int	index;
   int	size;
+	int	check;
   t_way *next;
   t_way *prev;
   t_way *list;
+	t_way *f;
 };
 
 typedef struct s_index t_index;
@@ -95,19 +97,21 @@ struct s_tree
   t_tree *prev;
 };
 
-void	ft_way(t_che *che, t_tree *tree);
+
+void	ft_choose(t_way *way, t_tree *tree);
+
+t_tree	*ft_getTreeEnd(t_tree *tree);
+
+void    ft_addList(t_way **w, t_way *n);
+
+void	ft_way(t_way **way, t_che *che, t_tree *tree);
+void	printWay(t_way *w);
 
 void	ft_printChe(t_che *che);
-
 void    ft_cpChe(t_che **che, t_tree *tree);
-
 t_che   *ft_newChe(int poids);
-
 void	ft_che(t_che **che, t_tree *tree);
 
-//void	ft_printWay(t_way * way);
-
-//void	ft_wayInit(t_way **way, t_tree *tree);
 
 void	ft_indexInit(t_index **index, t_tree *tree);
 
@@ -119,11 +123,4 @@ void	ft_tree(t_tree **tree, t_list *src);
 void	ft_treeInit(t_tree **tree, t_list *src);
 void	ft_ncurseInit(t_tree *tree);
 
-/*
-
-void    ft_wayAdd(t_way **way, t_way *new);
-void    ft_wayAddOther(t_way **way, t_way *new);
-t_way   *ft_wayNew(t_road *road, char *name, char *start, char *ref);
-void    ft_way(t_way **way, t_road *road, char *src, char *start);
-*/
 #endif

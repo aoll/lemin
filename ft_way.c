@@ -5,12 +5,12 @@ static void pw(t_way *w)
   printf("NEW WAY\n");
   while (w)
     {
-      printf("NAME: %s\n", w->name);
+		printf("NAME: %s, INDEX: %d, SIZE: %d\n", w->name, w->index, w->size);
       w = w->next;
     }
 }
 
-static void printWay(t_way *w)
+void printWay(t_way *w)
 {
   while (w)
     {
@@ -58,10 +58,12 @@ t_way	*ft_newWay(char *s)
   new = malloc(sizeof(t_way));
   new->index = 0;
   new->size = 1;
+  new->check = 0;
   new->name = ft_strdup(s);
   new->next = NULL;
   new->prev = NULL;
   new->list = NULL;
+  new->f = NULL;
   return (new);
 }
 
@@ -88,7 +90,7 @@ static void	ft_init(t_way **way, t_che *che)
   t = *way;
   if (t == NULL)
     {
-     printf("FIRST!!!\n");
+		// printf("FIRST!!!\n");
     *way = ft_cp(che);
     } 
   else
@@ -103,7 +105,7 @@ static void print(t_way **way, t_che *che, char *s)
       if (che->fin == 1)
 	{
 	  ft_init(way, che);
-	  printf("YOUPI!!!!!\n");
+	  //printf("YOUPI!!!!!\n");
 	}
       che = che->next;
     }
@@ -119,12 +121,8 @@ static void      ft_while(t_way **way, t_che *che)
     }
 }
 
-void	ft_way(t_che *che, t_tree *tree)
+void	ft_way(t_way **way, t_che *che, t_tree *tree)
 {
-  t_way *way;
-
-  way = NULL;
-  ft_while(&way, che);
-
-  printWay(way);
+	ft_while(way, che);
+//	printWay(w);
 }
