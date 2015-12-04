@@ -14,7 +14,7 @@ NAME = lemin
 
 IDIR = libft/libft.a
 LIB=-lncurses
-SRC =ft_error.c ft_choose.c ft_way.c ft_printChe.c ft_che.c main.c ft_tree.c ft_treeInit.c  ft_treeRoad.c ft_road.c ft_roadInit.c ft_ncurseIni.c 
+SRC =ft_error.c ft_choose.c ft_choosebis.c ft_way.c ft_printChe.c ft_che.c ft_chebis.c ft_cheter.c main.c ft_tree.c ft_treeInit.c ft_treeRoad.c ft_road.c ft_roadInit.c ft_ncurseIni.c 
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)

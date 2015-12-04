@@ -12,57 +12,41 @@
 
 #include "lemin.h"
 
-static int		ft_nb(t_tree *t)
+int		ft_sement(t_way *way, char *s)
 {
-	int nb;
-
-	nb = 0;
-	while (t->list[nb])
-		nb++;
-	return (nb);
-}
-
-static int		ft_size(t_way *w)
-{
-	int nb;
-
-	nb = 0;
-	while (w)
+	while (way)
 	{
-		nb++;
-		w = w->next;
+		if (ft_strcmp(way->name, s) == 1)
+			return (1);
+		way = way->next;
 	}
-	return (nb);
+	return (0);
 }
 
-static	void		ft_sizeway(t_way **way)
+int		ft_croi(t_way *way, t_way *w)
 {
-	t_way	*w;
-	int	nb;
+	way = way->next;
+	while (way->next)
+	{
+		if (ft_sement(w, way->name) == 1)
+			return (1);
+		way = way->next;
+	}
+	return (0);
+}
 
-	nb = -1;
-	w = *way;
+t_way		*ft_getshort(t_way *w)
+{
+	t_way *n;
+
+	n = malloc(sizeof(t_way));
+	n = w;
 	while (w)
 	{
-		w->index = ++nb;
-		w->size = ft_size(w);
+		if (w->size < n->size)
+			n = w;
 		w = w->list;
 	}
-	return ;
-}
-
-static void		ft_init(t_way *way, int nb)
-{
-	t_way *w;
-
-	w = ft_getshort(way);
-	printWay(w);
-}
-
-void			ft_choose(t_way *way, t_tree *tree)
-{
-	t_way **w;
-
-	ft_sizeway(&way);
-	ft_init(way, ft_nb(ft_getTreeEnd(tree)));
+	n->list = NULL;
+	return (n);
 }

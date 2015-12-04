@@ -101,6 +101,22 @@ int		ft_error(char *s);
 
 void	ft_choose(t_way *way, t_tree *tree);
 
+
+t_tree          *ft_getTree(t_tree *tree, char *nameTarget);
+t_tree          *ft_getTreeEnd(t_tree *tree);
+t_tree          *ft_getTreeStart(t_tree *tree);
+void            ft_addChe(t_che **che, t_che *new);
+int             ft_checkFa(t_che *che, char *s);
+void            ft_nextChe(t_che **che, t_tree *tree);
+void            ft_firstChe(t_che **che, t_tree *tree);
+t_che           *ft_newChe(int poids);
+void            ft_cpChe(t_che **che, t_tree *tree);
+void            ft_cpWay(t_che **che, t_tree *tree);
+
+int             ft_sement(t_way *way, char *s);
+t_way           *ft_getshort(t_way *w);
+int             ft_croi(t_way *way, t_way *w);
+
 t_tree	*ft_getTreeEnd(t_tree *tree);
 
 void    ft_addList(t_way **w, t_way *n);

@@ -10,33 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "lemin.h"
-//#include "/home/alex/C/lemin/libft/libft.h"
 
-int	char_c(char *s, char c)
+int		char_c(char *s, char c)
 {
-  int i;
-  int n;
+	int	i;
+	int	n;
 
-  n = 0;
-  i = 0;
-  while(s[i])
-    {
-      if (s[i] == c)
-	n++;
-      i++;
-    }
-  return (n);
+	n = 0;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			n++;
+		i++;
+	}
+	return (n);
 }
 
-void	ft_roadInit(t_road **road, t_list *list)
+void		ft_roadInit(t_road **road, t_list *list)
 {
-  while (list)
-    {
-      if (char_c(list->name, '-') == 1)
-       	//printf("%s\n", list->name);
-	ft_road(road, list->name);
-      list = list->next;
-    }
+	while (list)
+	{
+		if (char_c(list->name, '-') == 1)
+			ft_road(road, list->name);
+		list = list->next;
+	}
 }
