@@ -17,17 +17,6 @@ void	ft_treeRoadPrint(t_tree *tmp)
     }
 }
 
-char		*ft_startName(t_tree *tree)
-{
-	while (tree)
-	{
-		if (tree->start == true)
-			return (tree->name);
-		tree = tree->next;
-	}
-	return (NULL);
-}
-
 int		ft_nb_way(t_road *road, char *name)
 {
 	int nb;
@@ -42,23 +31,9 @@ int		ft_nb_way(t_road *road, char *name)
 	return (nb);
 }
 
-t_tree		*ft_giveBack(t_tree *tree, char *name)
+void		ft_treeroadinit(t_tree **tree, t_road *road)
 {
-	t_tree *tmp;
-
-	tmp = tree;
-	while (tmp)
-	{
-		if (ft_strcmp(tmp->name, name) == 1)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
-void		ft_treeRoadInit(t_tree **tree, t_road *road)
-{
-	t_tree *tmp;
+	t_tree	*tmp;
 	int	nb;
 	int	i;
 
@@ -85,7 +60,7 @@ void		ft_treeRoadInit(t_tree **tree, t_road *road)
 	}
 }
 
-void		ft_treeRoad(t_tree **tree, t_road *road)
+void		ft_treeroad(t_tree **tree, t_road *road)
 {
 	t_tree *tmp;
 	t_tree *tmp2;
@@ -93,7 +68,7 @@ void		ft_treeRoad(t_tree **tree, t_road *road)
 	tmp = *tree;
 	while (tmp)
 	{
-		ft_treeRoadInit(&tmp, road);
+		ft_treeroadinit(&tmp, road);
 		tmp = tmp->next;
 	}
 }

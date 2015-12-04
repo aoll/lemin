@@ -14,8 +14,8 @@
 
 int	ft_nb(char *s, char c)
 {
-	int i;
-	int n;
+	int		i;
+	int		n;
 
 	n = 0;
 	i = 0;
@@ -28,10 +28,10 @@ int	ft_nb(char *s, char c)
 	return (n);
 }
 
-void	ft_setEtatBis(t_tree **tree, char *str, int start)
+void	ft_setetatbis(t_tree **tree, char *str, int start)
 {
-	t_tree	*tmp;
-	char	**tab;
+	t_tree		*tmp;
+	char		**tab;
 
 	tab = ft_strsplit(str, ' ');
 	tmp = *tree;
@@ -50,9 +50,9 @@ void	ft_setEtatBis(t_tree **tree, char *str, int start)
 	return ;
 }
 
-void	ft_treeSetEtat(t_tree **tree, t_list *list, char *target, int start)
+void	ft_treesetetat(t_tree **tree, t_list *list, char *target, int start)
 {
-	t_tree	*tmp;
+	t_tree		*tmp;
 
 	tmp = *tree;
 	while (list)
@@ -64,7 +64,7 @@ void	ft_treeSetEtat(t_tree **tree, t_list *list, char *target, int start)
 			{
 				if (start == 1 || start == 2)
 				{
-					ft_setEtatBis(tree, list->name, start);
+					ft_setetatbis(tree, list->name, start);
 					return ;
 				}
 				list = list->next;
@@ -76,9 +76,9 @@ void	ft_treeSetEtat(t_tree **tree, t_list *list, char *target, int start)
 	}
 }
 
-void	ft_treeRoom(t_tree **tree, t_list *list)
+void	ft_treeroom(t_tree **tree, t_list *list)
 {
-	t_tree	*tmp;
+	t_tree		*tmp;
 
 	tmp = *tree;
 	while (list)
@@ -91,9 +91,9 @@ void	ft_treeRoom(t_tree **tree, t_list *list)
 	return ;
 }
 
-void	ft_treeInit(t_tree **tree, t_list *list)
+void	ft_treeinit(t_tree **tree, t_list *list)
 {
-	ft_treeRoom(tree, list);
-	ft_treeSetEtat(tree, list, "##end", 2);
-	ft_treeSetEtat(tree, list, "##start", 1);
+	ft_treeroom(tree, list);
+	ft_treesetetat(tree, list, "##end", 2);
+	ft_treesetetat(tree, list, "##start", 1);
 }

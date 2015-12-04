@@ -119,10 +119,13 @@ int             ft_croi(t_way *way, t_way *w);
 
 t_tree	*ft_getTreeEnd(t_tree *tree);
 
-void    ft_addList(t_way **w, t_way *n);
-
+void    ft_addlist(t_way **w, t_way *n);
+void                    ft_addway(t_way **w, t_way *n);
+t_way                   *ft_newway(char *s);
 void	ft_way(t_way **way, t_che *che, t_tree *tree);
 void	printWay(t_way *w);
+
+
 
 void	ft_printChe(t_che *che);
 void    ft_cpChe(t_che **che, t_tree *tree);
@@ -135,9 +138,9 @@ void	ft_indexInit(t_index **index, t_tree *tree);
 void	ft_road(t_road **road, char *src);
 void	ft_roadInit(t_road **road, t_list *src);
 
-void    ft_treeRoad(t_tree **tree, t_road *road);
+void    ft_treeroad(t_tree **tree, t_road *road);
 void	ft_tree(t_tree **tree, t_list *src);
-void	ft_treeInit(t_tree **tree, t_list *src);
+void	ft_treeinit(t_tree **tree, t_list *src);
 void	ft_ncurseInit(t_tree *tree);
 
 #endif

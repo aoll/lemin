@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 	  ft_list(&list, line);
   }
   
-  ft_treeInit(&tree, list);
+  ft_treeinit(&tree, list);
   
   ft_roadInit(&road, list);
   
@@ -47,7 +47,7 @@ int	main(int ac, char **av)
   //  ft_roadPrint(road);
   //ft_treePrint(tree);
   
-  ft_treeRoad(&tree, road);
+  ft_treeroad(&tree, road);
 //  ft_treeRoadPrint(tree);
   ft_che(&che, tree);
 
