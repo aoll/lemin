@@ -97,8 +97,6 @@ struct s_tree
   t_tree *prev;
 };
 
-int		ft_error(char *s);
-
 void	ft_choose(t_way *way, t_tree *tree);
 
 
@@ -141,6 +139,18 @@ void	ft_roadInit(t_road **road, t_list *src);
 void    ft_treeroad(t_tree **tree, t_road *road);
 void	ft_tree(t_tree **tree, t_list *src);
 void	ft_treeinit(t_tree **tree, t_list *src);
+
+int	ft_ck_room(char *s);
+int	ft_ck_valide_room(char *s);
+int	ft_ck_valide_pipe(char *s);
+int     ft_check_space(char *s);
+int     ft_ck_com(char *s);
+int     ft_ck_action(char *s);
+int     ft_ck_valide_action(char *s);
+int     ft_ck_digit(char *s);
+
+int	ft_ck_error(char *s);
+
 void	ft_ncurseInit(t_tree *tree);
 
 #endif
