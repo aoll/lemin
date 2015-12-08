@@ -35,7 +35,6 @@ struct s_list
   char *name;
   int *size;
   t_list *next;
-  //t_list *prev;                                                                                                                              
 };
 
 void    ft_list(t_list **list, char *src);
@@ -94,6 +93,7 @@ void	ft_putendl_fd(char const *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 int		get_next_line(int const fd, char **line);
 int		ft_fc(char *s, char c);
-
+int	ft_isspace(int c);
+int	ft_nb_c(char *s, char c);
 
 #endif

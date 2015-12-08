@@ -25,7 +25,7 @@ int		ft_mycpy(char **stat, char **line)
 	{
 		*line = ft_strnew(0);
 		*stat = ft_strsub((char *)tp, 1, l - 1);
-		free (tp);
+		free(tp);
 		return (1);
 	}
 	while (tp[i] != '\n' && tp[i] != '\0')
@@ -35,7 +35,7 @@ int		ft_mycpy(char **stat, char **line)
 		*stat = ft_strnew(0);
 		*line = ft_strsub((char *)tp, 0, i);
 		*stat = ft_strsub((char *)tp, i + 1, l - i - 1);
-		free (tp);
+		free(tp);
 		return (1);
 	}
 	return (0);
