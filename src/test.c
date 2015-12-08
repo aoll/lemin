@@ -9,6 +9,8 @@ int	ft_ck_room(char *s);
 int	ft_ck_valide_room(char *s);
 int	ft_ck_valide_pipe(char *s);
 
+int	ft_ck_error(char *s);
+
 void	test_ft_check_space(void)
 {
   //check space lign begin return 1 if char * begin by some space
@@ -31,7 +33,7 @@ void	test_ft_check_space(void)
   else if (ft_check_space("ok") == 1)
     printf ("\033[31;01mTEST 7 ft_check_space FAIL..\033[00m\n");
   else
-    printf ("\033[32;01mTEST ft_check_space OK\033[00m\n");
+    printf ("TEST ft_check_space \033[32;01mOK\033[00m\n");
   return ;
 }
 
@@ -136,6 +138,28 @@ void	test_ft_ck_valide_pipe(void)
   return ;
 }
 
+void	test_ft_ck_error(void)
+{
+  //check if char * is a valide pipe, if it's true return 1;
+  if (ft_ck_error("2-5") == 1)
+    printf ("\033[31;01mTEST 1 ft_ck_error FAIL..\033[00m\n");
+  
+  else if (ft_ck_error("5 6 7") == 1)
+    printf ("\033[31;01mTEST 2 ft_ck_error FAIL..\033[00m\n");
+  else if (ft_ck_error(" L4-6") != 1)
+    printf ("\033[31;01mTEST 3 ft_ck_error FAIL..\033[00m\n");
+   else if (ft_ck_error("v-4-9") != 1)
+    printf ("\033[31;01mTEST 4 ft_ck_error FAIL..\033[00m\n");
+   else if (ft_ck_error("kjfkjwn-Lok") != 1)
+     printf ("\033[31;01mTEST 5 ft_ck_error FAIL..\033[00m\n");
+   else if (ft_ck_error("  kjfkjwn-ok") != 1)
+     printf ("\033[31;01mTEST 5 ft_ck_error FAIL..\033[00m\n");
+    
+ else
+    printf ("TEST ft_ck_error \033[32;01mOK\033[00m\n");
+  return ;
+}
+
 int	main(void)
 {
   test_ft_check_space();
@@ -147,5 +171,7 @@ int	main(void)
   test_ft_ck_room();
   test_ft_ck_valide_room();
   test_ft_ck_valide_pipe();
+
+  test_ft_ck_error();
   return (0);
 }

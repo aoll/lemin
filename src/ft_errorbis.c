@@ -56,3 +56,17 @@ int	ft_ck_valide_pipe(char *s)
 		return (0);
 	return (1);
 }
+
+int	ft_ck_digit(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	  {
+	    if (ft_isdigit(s[i]) != 1)
+				return (0);
+			i++;
+	  }
+	return (1);
+}
