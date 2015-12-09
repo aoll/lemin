@@ -150,7 +150,11 @@ int     ft_ck_valide_action(char *s);
 int     ft_ck_digit(char *s);
 
 int	ft_ck_error(char *s);
+int	ft_vl_first_line(char *s);
+int	ft_vl_line(char*s);
+
 
 void	ft_ncurseInit(t_tree *tree);
+
 
 #endif

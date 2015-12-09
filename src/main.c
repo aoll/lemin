@@ -36,7 +36,10 @@ int	main(int ac, char **av)
   fd = 0;
   while ((rd = get_next_line(fd, &line)) > 0)
   {
+    if (ft_vl_line(line) == 1)
 	  ft_list(&list, line);
+    else
+      break ;
   }
   
   ft_treeinit(&tree, list);

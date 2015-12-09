@@ -10,8 +10,6 @@ int	ft_ck_valide_room(char *s);
 int	ft_ck_valide_pipe(char *s);
 
 int	ft_ck_error(char *s);
-int	ft_vl_first_line(char *s);
-int	ft_vl_line(char *s);
 
 void	test_ft_check_space(void)
 {
@@ -145,6 +143,7 @@ void	test_ft_ck_error(void)
   //check if char * is a valide pipe, if it's true return 1;
   if (ft_ck_error("2-5") == 1)
     printf ("\033[31;01mTEST 1 ft_ck_error FAIL..\033[00m\n");
+  
   else if (ft_ck_error("5 6 7") == 1)
     printf ("\033[31;01mTEST 2 ft_ck_error FAIL..\033[00m\n");
   else if (ft_ck_error(" L4-6") != 1)
@@ -161,48 +160,6 @@ void	test_ft_ck_error(void)
   return ;
 }
 
-void	test_ft_vl_first_line(void)
-{
-  //check if the first line is valide,  return 1 if it is true
-  if (ft_vl_first_line("25") != 1)
-    printf ("\033[31;01mTEST 1 ft_vl_first_line FAIL..\033[00m\n");
-    else if (ft_vl_first_line(" 567") == 1)
-    printf ("\033[31;01mTEST 2 ft_vl_first_line FAIL..\033[00m\n");
-  else if (ft_vl_first_line("5 6 7") == 1)
-    printf ("\033[31;01mTEST 2 ft_vl_first_line FAIL..\033[00m\n");
-  else if (ft_vl_first_line(" L4-6") == 1)
-    printf ("\033[31;01mTEST 3 ft_vl_first_line FAIL..\033[00m\n");
-   else if (ft_vl_first_line("#commentaire") == 1)
-    printf ("\033[31;01mTEST 4 ft_vl_first_line FAIL..\033[00m\n");
-   else if (ft_vl_first_line("kjfkjwn-Lok") == 1)
-     printf ("\033[31;01mTEST 5 ft_vl_first_line FAIL..\033[00m\n");
-   else if (ft_vl_first_line("  kjfkjwn-ok") == 1)
-     printf ("\033[31;01mTEST 5 ft_vl_first_line FAIL..\033[00m\n");
- else
-    printf ("TEST ft_vl_first_line \033[32;01mOK\033[00m\n");
-}
-
-void	test_ft_vl_line(void)
-{
-  //check if all the  line is valide, call ft_first_vl_line and ft_ck_error  return 1 if it is true
-  if (ft_vl_line("25") != 1)
-    printf ("\033[31;01mTEST 1 ft_vl_line FAIL..\033[00m\n");
-    else if (ft_vl_line(" 567") == 1)
-    printf ("\033[31;01mTEST 2 ft_vl_line FAIL..\033[00m\n");
-  else if (ft_vl_line("5 6 7") != 1)
-    printf ("\033[31;01mTEST 2 ft_vl_line FAIL..\033[00m\n");
-  else if (ft_vl_line(" L4-6") == 1)
-    printf ("\033[31;01mTEST 3 ft_vl_line FAIL..\033[00m\n");
-   else if (ft_vl_line("#commentaire") != 1)
-    printf ("\033[31;01mTEST 4 ft_vl_line FAIL..\033[00m\n");
-   else if (ft_vl_line("kjfkjwn-ok") != 1)
-     printf ("\033[31;01mTEST 5 ft_vl_line FAIL..\033[00m\n");
-   else if (ft_vl_line("  kjfkjwn-ok") == 1)
-     printf ("\033[31;01mTEST 5 ft_vl_line FAIL..\033[00m\n");
- else
-    printf ("TEST ft_vl_line \033[32;01mOK\033[00m\n");
-}
-
 int	main(void)
 {
   test_ft_check_space();
@@ -216,7 +173,5 @@ int	main(void)
   test_ft_ck_valide_pipe();
 
   test_ft_ck_error();
-  test_ft_vl_first_line();
-  test_ft_vl_line();
   return (0);
 }
