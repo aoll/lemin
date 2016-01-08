@@ -26,7 +26,6 @@
 # include <ncurses.h>
 # include "libft/libft.h"
 
-
 typedef struct s_che t_che;
 struct s_che
 {

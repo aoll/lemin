@@ -37,6 +37,7 @@ int		ft_croi(t_way *way, t_way *w)
 
 t_way		*ft_getshort(t_way *w)
 {
+	
 	t_way *n;
 
 	n = malloc(sizeof(t_way));
@@ -47,6 +48,9 @@ t_way		*ft_getshort(t_way *w)
 			n = w;
 		w = w->list;
 	}
-	n->list = NULL;
+	if (n)
+		n->list = NULL;
+	
 	return (n);
+	
 }

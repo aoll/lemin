@@ -53,16 +53,19 @@ static	void		ft_sizeway(t_way **way)
 
 static void		ft_init(t_way *way, int nb)
 {
-	t_way *w;
+		t_way *w;
 
-	w = ft_getshort(way);
-	printWay(w);
+		w = ft_getshort(way);
+		if (!w)
+			ft_putstr("ERROR\n"); // peut etre a checker a un autre endroit
+		
+		printWay(w);
 }
 
 void			ft_choose(t_way *way, t_tree *tree)
 {
 	t_way **w;
-
+	
 	ft_sizeway(&way);
 	ft_init(way, ft_nb(ft_getTreeEnd(tree)));
 }
