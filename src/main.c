@@ -14,6 +14,18 @@
 #include "../lemin.h"
 //#include "libft/libft.h"
 
+int	ft_nb_ant(t_list *list)
+{
+	while (list)
+	{
+		if (list->name[0] == '#')
+			list = list->next;
+		else
+		       	return (ft_atoi(list->name));
+	}
+	return (0);
+}
+
 int	ft_start_end(t_list *list)
 {
 	int	start;
@@ -34,6 +46,16 @@ int	ft_start_end(t_list *list)
 	return (0);
 }
 
+void	ft_list_print(t_list *list)
+{
+	if (list == NULL)
+		return;
+	ft_putstr(list->name);
+	ft_putchar('\n');
+	ft_list_print(list->next);
+	return;
+}
+
 int	main(int ac, char **av)
 {
   t_list *list;
@@ -44,6 +66,8 @@ int	main(int ac, char **av)
   t_road *road;
   t_way *way;
   t_che *che;
+  t_way *pt;
+  int nb_ant;
 
   way = NULL;
   che = NULL;
@@ -68,13 +92,15 @@ int	main(int ac, char **av)
 	  ft_putstr("ERROR\n");
 	  return (0);
   }
-  
+
+  nb_ant = ft_nb_ant(list);
+
   ft_treeinit(&tree, list);
   
     ft_roadInit(&road, list);
     
   //printf("<name: %s, size: %d>\n", tree->name, *tree->size);
-  //ft_listPrint(list);
+  ft_list_print(list);
   //  ft_roadPrint(road);
     // ft_treePrint(tree);
   
@@ -88,7 +114,9 @@ ft_che(&che, tree);
   
   //printWay(way);
 
-  ft_choose(way, tree);
+  pt = ft_choose(way, tree);
   
+  ft_print_ant(pt, nb_ant);
+  //printWay(pt);
   return (0);
 }

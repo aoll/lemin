@@ -14,7 +14,7 @@ NAME = lemin
 
 IDIR = libft/libft.a
 LIB=-lncurses
-SRC = src/ft_check_error.c src/ft_choose.c src/ft_choosebis.c src/ft_way.c src/ft_waybis.c src/ft_printChe.c src/ft_che.c src/ft_chebis.c src/ft_cheter.c src/main.c src/ft_tree.c src/ft_treeinit.c src/ft_treeroad.c src/ft_road.c src/ft_roadinit.c src/ft_ncurseIni.c src/ft_error.c src/ft_errorbis.c
+SRC = src/ft_check_error.c src/ft_choose.c src/ft_choosebis.c src/ft_way.c src/ft_waybis.c src/ft_printChe.c src/ft_che.c src/ft_chebis.c src/ft_cheter.c src/main.c src/ft_tree.c src/ft_treeinit.c src/ft_treeroad.c src/ft_road.c src/ft_roadinit.c src/ft_ncurseIni.c src/ft_error.c src/ft_errorbis.c src/ft_print_ant.c
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)

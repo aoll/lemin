@@ -63,6 +63,7 @@ struct s_way
   int	index;
   int	size;
 	int	check;
+	int	ant;
   t_way *next;
   t_way *prev;
   t_way *list;
@@ -96,8 +97,9 @@ struct s_tree
   t_tree *prev;
 };
 
-void	ft_choose(t_way *way, t_tree *tree);
+t_way	*ft_choose(t_way *way, t_tree *tree);
 
+void	ft_print_ant(t_way *w, int nb_ant);
 
 t_tree          *ft_getTree(t_tree *tree, char *nameTarget);
 t_tree          *ft_getTreeEnd(t_tree *tree);

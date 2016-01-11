@@ -63,5 +63,6 @@ t_way			*ft_newway(char *s)
 	new->prev = NULL;
 	new->list = NULL;
 	new->f = NULL;
+	new->ant = 0;
 	return (new);
 }
