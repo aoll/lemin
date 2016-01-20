@@ -1,0 +1,385 @@
+
+#include "../lemin.h"
+
+int	ft_ck_term(int term_y, int term_x)
+{
+	printf("term_y:: %d\n", term_y);
+	printf("term_y:: %d\n", term_x);
+	//endwin();
+	if (term_y < 20 || term_x < 50)
+	{
+		return (1);
+	}
+	
+	return (0);
+}
+
+void	ft_print_room(t_tree *tree)
+{
+	/*
+	while (tree)
+	{
+		if (tree->ant != 0)
+		{
+	
+			if (tree->end)
+				mvprintw(tree->y, tree->x, "@");
+			else if (tree->start)
+				mvprintw(tree->y, tree->x, "o");
+			else
+			
+				mvprintw(tree->y, tree->x, "A");
+		}
+		else
+			mvprintw(tree->y, tree->x, "#");
+		tree = tree->next;
+
+			
+				sleep(1);
+	}
+refresh();
+	*/
+	while (tree)
+	{
+		printf("NAME:: %s, ANT:: %d\n", tree->name, tree->ant);
+		tree = tree->next;
+	}
+	printf("%s\n", "------------------------------");
+	return;
+}
+
+void	ft_select_room(t_tree **tree, char *s)
+{
+	t_tree *t;
+	char **tab;
+
+	tab = ft_strsplit(s, '-');
+	t = *tree;
+	while (t)
+	{
+		//	printf("TAB::: %s\n", tab[1]);
+		//	printf("T NAME::: %s\n", t->name);
+		if (ft_strcmp(t->name, tab[1]) == 1)
+		{
+			t->ant = 1;
+			if (t->prev)
+				t->prev->ant = 0;
+			break;
+		}
+		t = t->next;
+	}
+	t = *tree;
+       	ft_print_room(t);
+	return;
+}
+
+void	ft_ant_room(t_tree **tree, t_list *l)
+{
+	t_tree *t;
+	char **tab;
+	int x;
+
+	x = 0;
+	t = *tree;
+	tab = ft_strsplit(l->name, ' ');
+	while (tab[x])
+	{
+		ft_select_room(tree, tab[x]);
+		x++;
+	}
+	return;
+}
+
+
+void	ft_ncurse_init(t_tree *tree, t_list *list, int ant)
+{
+	int term_y;
+	int term_x;
+
+	/*
+	initscr();        //init terminal
+	curs_set(0);      //enlever cursor
+       	cbreak();
+	nodelay(stdscr, true);     //getch non-bloquant
+	keypad(stdscr, true);//KEY_LEFT
+	getmaxyx(stdscr, term_y, term_x);  //get termsize
+	if (ft_ck_term(term_y, term_x) == 1)
+	{
+		ft_putstr("ERROR: WINDOW TOO SMALL\n");
+		return;
+	}
+
+	*/
+	//	sleep(1);
+
+		while (tree)
+		{
+			printf("%s\n", tree->name);
+			tree = tree->next;
+		}
+		/*
+		for (;;)
+		{
+			while (list)
+			{
+				ft_ant_room(&tree, list);
+				list = list->next;
+		       	}
+			//ft_print_room(tree);
+		}
+		*/
+			//		endwin();
+
+
+	//	start_color();	
+	/*
+	init_pair(Hero::col, COLOR_RED, COLOR_BLACK);
+	init_pair(Vilain::col, COLOR_BLUE, COLOR_BLACK);
+	init_pair(Shoot::col, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(Rock::col, COLOR_WHITE, COLOR_BLACK);
+	*/
+	/*
+	getmaxyx(stdscr, this->_termY, this->_termX);  //get termsize
+
+	if (this->_termX < 90 || this->_termY < 65)
+	{
+		mvprintw((this->_termY - 17) / 2, this->_termX / 2, "enlarge your term\n");
+		refresh();
+		//		sleep(2);
+		endwin();
+		exit(0);
+	}
+	*/
+}
+
+
+
+/*
+void		display(void) 
+{
+	this->_drawHeader();
+	this->_drawMap();
+	this->_drawRock();
+	if (_hero.life > 0)
+		this->_drawHero();
+	else
+		mvprintw(this->_termY / 2, (this->_termX - 20) / 2, "Wanna retry looser ?");
+	this->_drawVilain();
+	refresh();
+}
+*/
+/*
+
+
+
+Game::~Game(void)
+{
+	endwin();
+}
+
+
+void		Game::getInput(void) 
+{
+	int b;
+
+       	
+	//	cbreak();
+	b = getch();
+	if (b == KEY_LEFT || b == KEY_RIGHT)
+		this->_hero.move((b == KEY_RIGHT ? true : false));
+	else if (b == KEY_UP || b == KEY_DOWN)
+			this->_hero.moveUp((b == KEY_UP ? true : false));
+	else if (b == ' ')
+		this->_hero.fire();
+	else if (b == KEY_NPAGE || (b == 'y' && this->_hero.life <= 0))
+	{
+		this->_hero.init();
+		this->_score = 0;
+	}
+	else if (b == KEY_NPAGE || (b == 'n' && this->_hero.life <= 0))
+	{
+		endwin();
+		exit(0);
+	}
+}
+
+void		Game::_drawVar(int row, int col, char const *str, int var) const
+{
+	std::ostringstream	s;
+
+	mvprintw(row, col, str);
+	s << var;
+	printw(s.str().c_str());
+}
+
+void		Game::_drawHeader(void) const
+{
+	std::ostringstream	s;
+
+	mvprintw(0, 0, GAMENAME);
+	this->_drawVar(5, 60, "score: ", this->_score);
+	this->_drawVar(6, 60, " time: ", this->_time / 1000);
+
+	mvprintw(9, 60, " live:");
+	for (int i=0; i < this->_hero.life; ++i)
+		s << "^ ";
+	mvprintw(9, 67, s.str().c_str());
+}
+
+void		Game::_drawMap(void) const
+{
+	std::ostringstream	s;
+
+	mvprintw(13, 0, BORDURE);
+	for (std::size_t i=0; i < 50; ++i)
+		printw(EMPTY);
+	printw(BORDURE);
+}
+
+void		Game::_drawShip(int y, int x, char const *str, int col) const
+{
+	attron(COLOR_PAIR(col));
+	mvprintw(14 + y, x + 1, str);
+	attroff(COLOR_PAIR(col));
+}
+
+void		Game::_drawVilain(void) const
+{
+	for (std::size_t i=0; i<50; ++i) {
+		if (this->_vilain[i].getEtat() && this->_vilain[i].getY() >= 0) 
+		{
+			this->_drawShip(this->_vilain[i].getY(), this->_vilain[i].getX(), Vilain::img.c_str(), Vilain::col);
+			this->_drawShip(this->_vilain[i].getY(), this->_vilain[i].getX() - 1, "=", Vilain::col);
+			this->_drawShip(this->_vilain[i].getY(), this->_vilain[i].getX() + 1, "=", Vilain::col);
+			this->_drawShip(this->_vilain[i].getY(), this->_vilain[i].getX() - 2, "=", Vilain::col);
+			this->_drawShip(this->_vilain[i].getY(), this->_vilain[i].getX() + 2, "=", Vilain::col);
+			for (std::size_t j=0; j< 10; ++j){
+				if (this->_vilain[i].tir[j].getEtat() == true)
+					this->_drawShip(this->_vilain[i].tir[j].getY(), this->_vilain[i].tir[j].getX(), Shoot::img.c_str(), Shoot::col);}
+		}
+	}
+}
+
+void		Game::_drawRock(void) const
+{
+	for (std::size_t i=0; i<50; ++i) {
+		if (this->_rock[i].getEtat() && this->_rock[i].getY() >= 0) {
+			this->_drawShip(this->_rock[i].getY(), this->_rock[i].getX(), Rock::img.c_str(), Rock::col);
+		}
+	}
+}
+
+void		Game::_drawHero(void) const
+{
+	this->_drawShip(this->_hero.getY(), this->_hero.getX(), Hero::img.c_str(), Hero::col);
+	//this->_drawShip(this->_hero.getY() + 1, this->_hero.getX(), Hero::img.c_str(), Hero::col);
+	this->_drawShip(this->_hero.getY() + 1, this->_hero.getX() - 1, "|", Hero::col);
+	this->_drawShip(this->_hero.getY() + 1, this->_hero.getX() + 1, "|", Hero::col);
+	
+	for (std::size_t j=0; j< 100; ++j)
+	{
+		if (this->_hero.tir[j].getEtat() == true)
+			this->_drawShip(this->_hero.tir[j].getY(), this->_hero.tir[j].getX(), Shoot2::img.c_str(), Shoot::col);
+	}
+}
+
+void		Game::update(void)
+{
+	this->_time += this->_timeStep / 3000;
+
+
+
+
+//	COLLISION  Contre le Hero!!!
+	for (std::size_t i=0; i< 50; ++i) {
+		if (this->_rock[i].getEtat() == true && this->_rock[i].getX() == this->_hero.getX() && this->_rock[i].getY() == this->_hero.getY())
+		{
+			beep();
+			this->_hero.life--;
+		}
+		else if (this->_vilain[i].getEtat() == true && this->_vilain[i].getX() == this->_hero.getX() && this->_vilain[i].getY() == this->_hero.getY())
+		{
+			beep();
+			this->_hero.life--;
+		}
+
+			for (std::size_t j=0; j< 10; ++j){
+				if (this->_vilain[i].getEtat() == true && this->_vilain[i].tir[j].getEtat() == true && this->_vilain[i].tir[j].getX() == this->_hero.getX() && this->_vilain[i].tir[j].getY() == this->_hero.getY())
+		{
+					beep();
+					this->_hero.life--;
+		}
+				else if (this->_vilain[i].getEtat() == true && this->_vilain[i].tir[j].getEtat() == true && this->_vilain[i].tir[j].getX() == this->_hero.getX() && this->_vilain[i].tir[j].getY() == this->_hero.getY() - 1)
+		{
+					beep();
+					this->_hero.life--;
+		}
+		
+			}
+	}
+
+//	COLLISION  Contre les Vilains!!!
+	for (std::size_t i=0; i< 100; ++i) {
+		
+		for (std::size_t z=0; z< 50; ++z){
+			if (this->_vilain[z].getEtat() == true && this->_hero.tir[i].getEtat() == true && this->_vilain[z].getX() == this->_hero.tir[i].getX() && this->_vilain[z].getY() == this->_hero.tir[i].getY())
+			 {
+				 this->_vilain[z].setEtat(false);
+				 this->_score += 10;
+			 }
+			else if (this->_vilain[z].getEtat() == true && this->_hero.tir[i].getEtat() == true && this->_vilain[z].getX() == this->_hero.tir[i].getX() && this->_vilain[z].getY() - 1== this->_hero.tir[i].getY())
+			 {
+				 this->_vilain[z].setEtat(false);
+				 this->_score += 10;
+			 }
+
+			*/
+/*				 for (std::size_t j=0; j< 50; ++j){
+					 if (this->_vilain[z].tir[j].getEtat() == true && this->_vilain[z].tir[j].getX() == this->_hero.tir[i].getX() && this->_vilain[z].tir[j].getY() == this->_hero.tir[i].getY())
+					 {
+						 this->_vilain[z].tir[j].setEtat(false);
+						 this->_score += 10;
+					 }
+				 }
+*/
+/*		}
+	}
+	
+	for (std::size_t i = 0; i < 100; ++i){
+		for (std::size_t z=0; z < 50; ++z){
+			if (this->_rock[z].getEtat() == true && this->_rock[z].getX() == this->_hero.tir[i].getX() && this->_rock[z].getY() == this->_hero.tir[i].getY())
+				this->_hero.tir[i].setEtat(false);
+			else if (this->_rock[z].getEtat() == true && this->_rock[z].getX() == this->_hero.tir[i].getX() && this->_rock[z].getY() == this->_hero.tir[i].getY() + 1)
+				this->_hero.tir[i].setEtat(false);
+			else if (this->_rock[z].getEtat() == true && this->_rock[z].getX() == this->_hero.tir[i].getX() && this->_rock[z].getY() == this->_hero.tir[i].getY() - 1)
+				this->_hero.tir[i].setEtat(false);
+		}
+	}
+
+
+										
+
+
+//	SCORE !!!
+
+	for (std::size_t i=0; i< 50; ++i) {
+		this->_rock[i].move();
+		this->_vilain[i].move();
+		for (std::size_t j=0; j< 10; ++j){
+			this->_vilain[i].tir[j].move();}
+		
+	}	
+		for (std::size_t j=0; j< 100; ++j){
+				this->_hero.tir[j].move();} 
+//	this->_hero.move();
+
+
+}
+
+
+
+int		Game::getTimeStep(void) const
+{return this->_timeStep;}
+void		Game::setTimeStep(int const timeStep)
+{this->_timeStep = timeStep;}
+*/

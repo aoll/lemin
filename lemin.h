@@ -84,6 +84,7 @@ struct s_index
 typedef struct s_tree t_tree;
 struct s_tree
 {
+	int ant;
   int test;
   char *name;
   int x;
@@ -95,6 +96,13 @@ struct s_tree
   t_tree **tab;
   char **list;
   t_tree *prev;
+};
+
+typedef struct s_ant t_ant;
+struct s_ant
+{
+	char *name;
+	t_ant *next;
 };
 
 t_way	*ft_choose(t_way *way, t_tree *tree);
@@ -155,7 +163,9 @@ int	ft_vl_first_line(char *s);
 int	ft_vl_line(char*s);
 
 
-void	ft_ncurseInit(t_tree *tree);
+void	ft_ncurse_init(t_tree *tree, t_list *list, int ant);
+//void	ft_init_ant(t_list *list);
 
+t_tree	*ft_tri_tree(t_list *l);
 
 #endif
