@@ -6,7 +6,7 @@
 /*   By: aollivie <aollivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 08:25:44 by aollivie          #+#    #+#             */
-/*   Updated: 2015/12/02 13:54:40 by aollivie         ###   ########.fr       */
+/*   Updated: 2016/01/27 17:32:19 by aollivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_way		*ft_init(t_way *way, int nb)
 		w = ft_getshort(way);
 		if (!w)
 			ft_putstr("ERROR\n"); // peut etre a checker a un autre endroit
-		
+		return (w);
 		//printWay(w);
 }
 
